@@ -4,6 +4,11 @@
 	$text="";
 	$replaceText="";
 	$replacedText="";
+    $removedText = "";
+    $replaceComaAndDot = "";
+    $removeNewLine= "";
+
+    $popTheWord= "";
 
 	$match="Not checked yet.";
 
@@ -19,6 +24,14 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 					} else {
 						$match="Does not match!";
 					}
+
+    $removedText=preg_replace('/\s+/', '', $text);
+
+    $replaceComaAndDot=preg_replace('/[^0-9,.]/', '', $text);
+
+    $removeNewLine=preg_replace('/\s+/', ' ', trim($text));
+
+    $popTheWord=preg_replace('#\[(.*?)\]#', $text, $match);
 }
 
 ?>
@@ -48,7 +61,19 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			<dt>Replaced Text</dt>
 			<dd> <code><?=	$replacedText ?></code></dd>
 
-			<dt>&nbsp;</dt>
+            <dt>Removed whitespace</dt>
+            <dd> <code><?=	$removedText ?></code></dd>
+
+            <dt>Replace Coma And Dot</dt>
+            <dd> <code><?=	$replaceComaAndDot ?></code></dd
+
+            <dt>Remove New Line</dt>
+            <dd> <code><?=	$removeNewLine ?></code></dd
+
+            <dt>Pop The Word </dt>
+            <dd> <code><?=	$popTheWord ?></code></dd
+
+            <dt>&nbsp;</dt>
 			<dd><input type="submit" value="Check"></dd>
 		</dl>
 
